@@ -1,0 +1,40 @@
+*, ::after, ::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+article, details, figcaption, figure, footer, header, main, menu, nav, img, section {
+  display: block;
+}
+
+a, article, b, blockquote, body, center, cite, code, details, div, fieldset,
+figcaption, figure, footer, form, h1, h2, h3, h4, header, html, i, iframe,
+img, label, li, main, menu, nav, object, ol, p, s, section, span, strong, sub,
+table, tbody, td, th, thead, time, tr, tt, ul, var, video {
+  vertical-align: baseline;
+}
+
+body {
+  line-height: 1.5;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background-color: transparent;
+}
+
+img {
+  max-width: 100%;
+}

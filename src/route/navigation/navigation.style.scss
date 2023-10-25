@@ -1,0 +1,19 @@
+@use '../../assets/sass/abstracts/' as *;
+
+.nav{
+  @include flex($jc:space-between, $ai:center);
+  height: 10vh;
+  min-height: 70px;
+  padding: 10px;
+  &-link-container{
+    @include flex($jc:center);
+    gap: $size-md;
+  }
+  &-link{
+    font-size: clamp(16px, 1.5vw + 5px, 20px);
+
+    @include respond-to('small'){
+      display: none;
+    }
+  }
+}

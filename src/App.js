@@ -2,15 +2,11 @@ import Home from "./route/home/home.component";
 import { Routes, Route } from "react-router-dom";
 import Navigation from "./route/navigation/navigation.component";
 import Authentication from "./route/authentication/authentication.component";
+import Shop from "./route/shop/shop.component";
+import CheckOut from "./route/checkout/checkout.component";
 
 
 
-
-const Shop = () => {
-  return (
-    <h1>I am a shopping page</h1>
-  )
-}
 
 const App = () => {
   return (
@@ -20,6 +16,7 @@ const App = () => {
           <Route index element={<Home/>}></Route>
           <Route path="/shop" element={<Shop/>}></Route>
           <Route path="/auth" element={<Authentication/>}></Route>
+          <Route path="/checkout" element = { <CheckOut/> }></Route>
         </Route>
       </Routes>
     </div>

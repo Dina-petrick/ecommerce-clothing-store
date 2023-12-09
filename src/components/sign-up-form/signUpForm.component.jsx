@@ -5,7 +5,9 @@ import FormInput from '../form-input/form-input.component';
 import Button from "../button/button.component"
 
 
+
 const SignUpForm = () => {
+
 
   const defaultFormField = {
     displayName: '',
@@ -39,9 +41,7 @@ const SignUpForm = () => {
 
     try{
       const {user} = await createAuthUserWithEmailAndPassword(email, password);
-      console.log(user);
-      let res = await createUserDocumentFromAuth(user, {displayName});
-      console.log(res);
+      await createUserDocumentFromAuth(user, {displayName});
       resetFormField();
     }
     catch(error){

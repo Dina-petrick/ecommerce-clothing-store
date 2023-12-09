@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import { signInWithGooglePopup, createUserDocumentFromAuth} from '../../utils/firebase/firebase.utils';
+import { signInWithGooglePopup} from '../../utils/firebase/firebase.utils';
 import { signInAuthUserWithEmailAndPassword } from '../../utils/firebase/firebase.utils';
+
+
 import FormInput from '../form-input/form-input.component';
 import "./signInForm.style.scss";
 import Button from "../button/button.component"
@@ -8,11 +10,10 @@ import Button from "../button/button.component"
 
 const SignInForm = () => {
 
+
   const signInWithGoogle = async () => {
     try{
-      const {user} = await signInWithGooglePopup();
-      const userDocumentReference = await createUserDocumentFromAuth(user);
-      console.log(userDocumentReference);
+    await signInWithGooglePopup();
     }catch(error){
       if(error.message === "auth/popup-closed-by-user"){
         console.log("auth/popup-closed-by-user");
@@ -42,7 +43,8 @@ const SignInForm = () => {
     e.preventDefault();
 
     try{
-      await signInAuthUserWithEmailAndPassword(email, password);
+      let user = await signInAuthUserWithEmailAndPassword(email, password);
+      console.log(user)
       resetFormField();
     }
     catch(error){

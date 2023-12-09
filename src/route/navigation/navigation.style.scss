@@ -6,12 +6,12 @@
   min-height: 70px;
   padding: 10px;
   &-link-container{
-    @include flex($jc:center);
+    @include flex($jc:space-between, $ai:center);
     gap: $size-md;
   }
   &-link{
     font-size: clamp(16px, 1.5vw + 5px, 20px);
-
+    cursor: pointer;
     @include respond-to('small'){
       display: none;
     }

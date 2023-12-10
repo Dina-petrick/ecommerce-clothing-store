@@ -1,6 +1,5 @@
 .product-card-container {
-  width: calc(calc(100% - 60px) / 3);
-  aspect-ratio: 3/2;
+  width: 100%;
   display: flex;
   flex-direction: column;
   height: 350px;

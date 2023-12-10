@@ -1,19 +1,25 @@
-@use '../../assets/sass/abstracts/' as *;
+.navigation {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
 
-.nav{
-  @include flex($jc:space-between, $ai:center);
-  height: 10vh;
-  min-height: 70px;
-  padding: 10px;
-  &-link-container{
-    @include flex($jc:space-between, $ai:center);
-    gap: $size-md;
+  .logo-container {
+    padding-left: 25px;
   }
-  &-link{
-    font-size: clamp(16px, 1.5vw + 5px, 20px);
-    cursor: pointer;
-    @include respond-to('small'){
-      display: none;
+
+  .nav-links-container {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .nav-link {
+      padding-inline: 20px;
+      cursor: pointer;
     }
   }
 }

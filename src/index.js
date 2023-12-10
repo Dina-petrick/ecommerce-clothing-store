@@ -6,20 +6,20 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import UserProvider from './context/UserProvider.context';
-import ProductProvider from './context/productProvider.context';
+import CategoriesProvider from './context/categories.context';
 import CartProvider from './context/cart.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ProductProvider>
         <UserProvider>
-          <CartProvider>
-            <App />
-          </CartProvider>
+            <CategoriesProvider>
+              <CartProvider>
+                <App />
+              </CartProvider>
+            </CategoriesProvider>
         </UserProvider>
-      </ProductProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

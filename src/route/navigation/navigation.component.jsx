@@ -24,24 +24,28 @@ const Navigation = () => {
 
   return (
     <Fragment>
-      <div className="nav">
-        <Link to="/">
-          <NavLogo className="nav-logo" />
+      <div className='navigation'>
+        <Link className='logo-container' to='/'>
+          <NavLogo className='logo' />
         </Link>
-        <ul className="nav-link-container">
-          <li className="nav-link">
-            <Link to="/shop">shop</Link>
-          </li>
-          <li className="nav-link">
-            {currentUser ? 
-            <span className="nav-link" onClick={signOutHandler}> sign out </span> :
-            <Link to="/auth" className="nav-link">Sign In</Link>
-            }
-          </li>
+        <div className='nav-links-container'>
+          <Link className='nav-link' to='/shop'>
+            SHOP
+          </Link>
+
+          {currentUser ? (
+            <span className='nav-link' onClick={signOutHandler}>
+              SIGN OUT
+            </span>
+          ) : (
+            <Link className='nav-link' to='/auth'>
+              SIGN IN
+            </Link>
+          )}
           <CartIcon />
-        </ul>
+        </div>
+        {isCartOpen && <CartDropdown />}
       </div>
-      {isCartOpen && <CartDropdown />}
       <Outlet />
     </Fragment>
   );

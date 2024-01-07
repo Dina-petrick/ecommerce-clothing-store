@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 
 import { CartContext } from '../../context/cart.context';
-import "./cart-item.style.scss";
 
+import { CartItemContainer, CartImg, ItemDetails, Name, ButtonX } from './cart-item.style';
 const CartItem = ({item}) => {
 
     const {imageUrl, name, price, quantity} = item;
@@ -10,21 +10,19 @@ const CartItem = ({item}) => {
     const {removeItemFromCart} = useContext(CartContext);
     
     const removeItem = () => {
-      console.log(item)
-      console.log('hit', removeItemFromCart(item))
       return removeItemFromCart(item)
     };
   return (
-    <div className='cart-item-container'>
-      <img src={imageUrl} alt= {name} />
-      <div className="item-details">
-        <div className='name'>{name}</div>
-        <div className='price'>{quantity} X {price}</div>
-      </div>
+    <CartItemContainer>
+      <CartImg src={imageUrl} alt= {name} />
+      <ItemDetails>
+        <Name>{name}</Name>
+        <p className='price'>{quantity} X {price}</p>
+      </ItemDetails>
 
-        <button onClick={removeItem}>X</button>
-    </div>
+        <ButtonX onClick={removeItem}>X</ButtonX>
+    </CartItemContainer>
   )
 }
 
-export default CartItem
+export default CartItem;

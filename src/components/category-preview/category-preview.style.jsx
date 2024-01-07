@@ -9,10 +9,23 @@ margin-bottom: 30px;
 `
 
 
-export const Title = styled(Link)`
-  font-size: 28px;
-  margin-bottom: 25px;
+export const Title = styled.h2`
+  margin-bottom: 20px;
   cursor: pointer;
+`
+
+export const TitleLink = styled(Link)`
+  font-size: 28px;
+  letter-spacing: 4px;
+  transition : letter-spacing 0.2s ease;
+  &:hover{
+    letter-spacing: 1px
+  }
+`
+
+export const Arrow = styled.span`
+  display:inline-block;
+  margin-left: 5px;
 `
 
 export const Preview = styled.div`

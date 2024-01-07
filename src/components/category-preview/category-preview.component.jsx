@@ -1,6 +1,6 @@
 import ProductCard from '../product-card/product-card.component';
 
-import { CategoryPreviewContainer, Title, Preview } from './category-preview.style';
+import { CategoryPreviewContainer, Title, Preview,TitleLink, Arrow } from './category-preview.style';
 
 
 import React from 'react'
@@ -9,11 +9,12 @@ const CategoryPreview = ({title, products}) => {
 
   return (
     <CategoryPreviewContainer>
-      <h2>
-        <Title to={title}>
-          {title.toUpperCase()}
-        </Title>
-      </h2>
+      <Title>
+        <TitleLink to={title}>
+          {title.toUpperCase()} 
+          <Arrow> &gt; </Arrow>
+        </TitleLink>
+      </Title>
       <Preview>
         {products
           .filter((_, idx) => idx < 4)

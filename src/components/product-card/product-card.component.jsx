@@ -3,19 +3,37 @@ import {
   Footer,
   Name,
   Price,
+  AddToCartBtn
 } from './product-card.style';
-import Button, {BUTTON_TYPE_CLASSES} from '../button/button.component';
+
 
 import { CartContext } from '../../context/cart.context';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 
 const ProductCard = ({product}) => {
   const {name,price, imageUrl} = product;
 
-  const { addItemToCart } = useContext(CartContext)
+  const { addItemToCart, cartItems, removeItemFromCart } = useContext(CartContext);
+  
+  useEffect(() => {
+  })
+  
 
-  const addToCart = () => addItemToCart(product)
+  const addToCart = () => {
+    addItemToCart(product);
+  }
+  
+  const itemCart = cartItems.filter((item, key) => item.id === product.id)[0];
+  const quantity = itemCart?.quantity;
+
+  const removeItem = () => {
+    if(itemCart && itemCart.quantity >= 1){
+        removeItemFromCart(itemCart)
+    }
+  }
+
+
 
   return (
     <ProductCartContainer>
@@ -24,13 +42,13 @@ const ProductCard = ({product}) => {
         <Name>{name}</Name>
         <Price>{price}</Price>
       </Footer>
-      <Button 
-      buttonType={BUTTON_TYPE_CLASSES.inverted}
-      onClick={addToCart}>
-        Add to card
-      </Button>
+      <AddToCartBtn>
+        <div style={{width: '40px'}}  onClick={removeItem}>-</div>
+        <div style={{width: '160px'}} >{quantity ? quantity : "add to cart"}</div>
+        <div style={{width: '40px'}} onClick={addToCart}>+</div>
+      </AddToCartBtn>
     </ProductCartContainer>
-  )
+  );
 }
 
 export default ProductCard;

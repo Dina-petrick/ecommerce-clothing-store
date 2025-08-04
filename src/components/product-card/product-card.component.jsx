@@ -43,9 +43,9 @@ const ProductCard = ({product}) => {
         <Price>{price}</Price>
       </Footer>
       <AddToCartBtn>
-        <div style={{width: '40px'}}  onClick={removeItem}>-</div>
+        <div style={{width: '40px', fontSize: "20px"}}  onClick={removeItem}>-</div>
         <div style={{width: '160px'}} >{quantity ? quantity : "add to cart"}</div>
-        <div style={{width: '40px'}} onClick={addToCart}>+</div>
+        <div style={{width: '40px',fontSize: "20px"}} onClick={addToCart}>+</div>
       </AddToCartBtn>
     </ProductCartContainer>
   );

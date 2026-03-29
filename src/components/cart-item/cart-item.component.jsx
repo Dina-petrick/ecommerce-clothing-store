@@ -1,28 +1,46 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 
 import { CartContext } from '../../context/cart.context';
+import LazyImage from '../lazy-image/lazy-image.component';
+import { formatPrice } from '../../utils/format-price';
 
-import { CartItemContainer, CartImg, ItemDetails, Name, ButtonX } from './cart-item.style';
-const CartItem = ({item}) => {
+import {
+  CartItemContainer,
+  ThumbWrap,
+  ItemDetails,
+  Name,
+  PriceLine,
+  RemoveBtn,
+} from './cart-item.style';
 
-    const {imageUrl, name, price, quantity} = item;
+const CartItem = ({ item }) => {
+  const { imageUrl, name, price, quantity } = item;
 
-    const {removeItemFromCart} = useContext(CartContext);
-    
-    const removeItem = () => {
-      return removeItemFromCart(item)
-    };
+  const { removeItemFromCart } = useContext(CartContext);
+
+  const removeItem = () => removeItemFromCart(item);
+
   return (
     <CartItemContainer>
-      <CartImg src={imageUrl} alt= {name} />
+      <ThumbWrap>
+        <LazyImage src={imageUrl} alt={name} />
+      </ThumbWrap>
       <ItemDetails>
         <Name>{name}</Name>
-        <p className='price'>{quantity} X {price}</p>
+        <PriceLine>
+          {quantity} × {formatPrice(price)}
+        </PriceLine>
       </ItemDetails>
 
-        <ButtonX onClick={removeItem}>X</ButtonX>
+      <RemoveBtn
+        type="button"
+        onClick={removeItem}
+        aria-label={`Remove ${name} from cart`}
+      >
+        ×
+      </RemoveBtn>
     </CartItemContainer>
-  )
-}
+  );
+};
 
 export default CartItem;

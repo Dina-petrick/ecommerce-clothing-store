@@ -1,54 +1,78 @@
 import {
   ProductCartContainer,
+  ProductImageWrap,
   Footer,
   Name,
   Price,
-  AddToCartBtn
+  AddToCartButton,
+  QtyStepper,
+  StepBtn,
+  QtyDisplay,
+  QtySub,
 } from './product-card.style';
 
-
 import { CartContext } from '../../context/cart.context';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
+import LazyImage from '../lazy-image/lazy-image.component';
+import { formatPrice } from '../../utils/format-price';
 
+const ProductCard = ({ product }) => {
+  const { name, price, imageUrl } = product;
 
-const ProductCard = ({product}) => {
-  const {name,price, imageUrl} = product;
-
-  const { addItemToCart, cartItems, removeItemFromCart } = useContext(CartContext);
-  
-  useEffect(() => {
-  })
-  
+  const { addItemToCart, cartItems, removeItemFromCart } =
+    useContext(CartContext);
 
   const addToCart = () => {
     addItemToCart(product);
-  }
-  
-  const itemCart = cartItems.filter((item, key) => item.id === product.id)[0];
-  const quantity = itemCart?.quantity;
+  };
+
+  const itemInCart = cartItems.find((item) => item.id === product.id);
+  const quantity = itemInCart?.quantity ?? 0;
 
   const removeItem = () => {
-    if(itemCart && itemCart.quantity >= 1){
-        removeItemFromCart(itemCart)
+    if (itemInCart && itemInCart.quantity >= 1) {
+      removeItemFromCart(itemInCart);
     }
-  }
-
-
+  };
 
   return (
     <ProductCartContainer>
-      <img src={imageUrl} alt={`${name}`} />
+      <ProductImageWrap>
+        <LazyImage src={imageUrl} alt={name} />
+      </ProductImageWrap>
       <Footer>
         <Name>{name}</Name>
-        <Price>{price}</Price>
+        <Price>{formatPrice(price)}</Price>
       </Footer>
-      <AddToCartBtn>
-        <div style={{width: '40px', fontSize: "20px"}}  onClick={removeItem}>-</div>
-        <div style={{width: '160px'}} >{quantity ? quantity : "add to cart"}</div>
-        <div style={{width: '40px',fontSize: "20px"}} onClick={addToCart}>+</div>
-      </AddToCartBtn>
+
+      {quantity === 0 ? (
+        <AddToCartButton type="button" onClick={addToCart}>
+          Add to cart
+        </AddToCartButton>
+      ) : (
+        <QtyStepper>
+          <StepBtn
+            type="button"
+            aria-label={`Remove one ${name} from cart`}
+            onClick={removeItem}
+          >
+            −
+          </StepBtn>
+          <QtyDisplay>
+            {quantity}
+            <QtySub>in cart</QtySub>
+          </QtyDisplay>
+          <StepBtn
+            type="button"
+            aria-label={`Add one more ${name}`}
+            onClick={addToCart}
+          >
+            +
+          </StepBtn>
+        </QtyStepper>
+      )}
     </ProductCartContainer>
   );
-}
+};
 
 export default ProductCard;

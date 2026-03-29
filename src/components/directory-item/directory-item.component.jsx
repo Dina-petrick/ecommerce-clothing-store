@@ -1,23 +1,16 @@
-import {
-  BackgroundImage,
-  Body,
-  DirectoryItemContainer,
-} from "./directory-item.style";
+import { Body, DirectoryItemContainer, DirectoryMedia } from './directory-item.style';
 
-import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import LazyImage from '../lazy-image/lazy-image.component';
 
 const DirectoryItem = ({ category }) => {
   const { imageUrl, title, route } = category;
 
-  const navigate = useNavigate();
-
-  const onHandlerNavigator = () => navigate(route);
-
   return (
-    <DirectoryItemContainer onClick={onHandlerNavigator}>
-      <BackgroundImage
-        imageUrl = { imageUrl }
-      />
+    <DirectoryItemContainer as={Link} to={`/${route}`}>
+      <DirectoryMedia>
+        <LazyImage src={imageUrl} alt={`${title} category`} />
+      </DirectoryMedia>
       <Body>
         <h2>{title}</h2>
         <p>Shop Now</p>

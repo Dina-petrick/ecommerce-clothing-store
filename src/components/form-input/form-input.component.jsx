@@ -1,16 +1,18 @@
+import { FormInputLabel, Input, Group, FieldError } from './form-input.style';
 
-import { FormInputLabel, Input,Group } from "./form-input.style";
-
-const FormInput = ({ label, ...otherProps }) => {
+const FormInput = ({ label, error, ...otherProps }) => {
   return (
-    <Group>
-      <Input {...otherProps} />
+    <Group $hasError={!!error}>
+      <Input {...otherProps} $hasError={!!error} />
       {label && (
-        <FormInputLabel shrink={otherProps.value.length}
+        <FormInputLabel
+          shrink={(otherProps.value ?? '').length}
+          $error={!!error}
         >
           {label}
         </FormInputLabel>
       )}
+      {error ? <FieldError role="alert">{error}</FieldError> : null}
     </Group>
   );
 };

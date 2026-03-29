@@ -1,15 +1,19 @@
-import { useContext } from "react";
+import { useContext } from 'react';
 
-import { CheckoutItemContainer,
+import {
+  CheckoutItemContainer,
   ImageContainer,
   BaseSpan,
   Quantity,
-  Arrow,
+  ArrowBtn,
   Value,
+  RemoveCol,
   RemoveButton,
-} from "./checkout-item.style";
+} from './checkout-item.style';
 
-import { CartContext } from "../../context/cart.context";
+import { CartContext } from '../../context/cart.context';
+import LazyImage from '../lazy-image/lazy-image.component';
+import { formatPrice } from '../../utils/format-price';
 
 const CheckoutItem = ({ cartItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
@@ -24,22 +28,36 @@ const CheckoutItem = ({ cartItem }) => {
   return (
     <CheckoutItemContainer>
       <ImageContainer>
-        <img src={imageUrl} alt={`${name}`} />
+        <LazyImage src={imageUrl} alt={name} />
       </ImageContainer>
-      <BaseSpan> {name} </BaseSpan>
+      <BaseSpan>{name}</BaseSpan>
       <Quantity>
-        <Arrow  onClick={removeItemHandler}>
+        <ArrowBtn
+          type="button"
+          onClick={removeItemHandler}
+          aria-label={`Decrease ${name}`}
+        >
           &#10094;
-        </Arrow>
+        </ArrowBtn>
         <Value>{quantity}</Value>
-        <Arrow  onClick={addItemHandler}>
+        <ArrowBtn
+          type="button"
+          onClick={addItemHandler}
+          aria-label={`Increase ${name}`}
+        >
           &#10095;
-        </Arrow>
+        </ArrowBtn>
       </Quantity>
-      <BaseSpan> {price}</BaseSpan>
-      <RemoveButton  onClick={clearItemHandler}>
-        &#10005;
-      </RemoveButton>
+      <BaseSpan>{formatPrice(price)}</BaseSpan>
+      <RemoveCol>
+        <RemoveButton
+          type="button"
+          onClick={clearItemHandler}
+          aria-label={`Remove ${name}`}
+        >
+          &#10005;
+        </RemoveButton>
+      </RemoveCol>
     </CheckoutItemContainer>
   );
 };
